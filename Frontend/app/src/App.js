@@ -5,6 +5,7 @@ import SignUp from "./components/SignUp";
 import * as ROUTES from "./constants/routes";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Dashboard from "./components/Dashboard";
 
 const theme = createTheme();
 
@@ -17,6 +18,7 @@ function App() {
           </Route>
           <Route path={ROUTES.SIGN_IN} element={<SignIn />}></Route>
           <Route path={ROUTES.SIGN_UP} element={<SignUp />}></Route>
+          <Route path={ROUTES.DASHBOARD} element={<Dashboard />}></Route>
         </Routes>
       </Router>
     </ThemeProvider>

@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -14,9 +12,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useState } from 'react';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
 import * as ROUTES from "../constants/routes";
 
 
@@ -24,7 +19,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="#1ea407" href={ROUTES.HOME}>
+      <Link color="#158f00" href={ROUTES.HOME}>
         Green Store
       </Link>{' '}
       {new Date().getFullYear()}
@@ -44,8 +39,9 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5000/api/users' , {username , email , password}).then((result) => {
+    axios.post('http://localhost:5000/api/users/signup' , {username , email , password}).then((result) => {
         console.log(result);
+        window.location = ROUTES.SIGN_IN;
     }).catch((err) => {
 
       alert('The User Is Already Exist');
@@ -55,7 +51,7 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs"  sx = {{backgroundColor: '#e9e9e984' , width: 500 , height: 550 , borderRadius: 15}}>
         <CssBaseline />
         <Box
           sx={{
@@ -114,24 +110,23 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2,
+                backgroundColor: '#1ea407',
+                "&:hover": {
+                  backgroundColor: "limegreen",
+                },
+              }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href={ROUTES.SIGN_IN} variant="body2" sx = {{color: 'black'}}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
