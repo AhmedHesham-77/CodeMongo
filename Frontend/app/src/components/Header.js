@@ -11,8 +11,6 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
-
-
 const pages = ["Sign in", "Sign up"];
 
 function Header() {
@@ -27,24 +25,32 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#d5d5d5" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#1c2f19" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to={ROUTES.HOME}>
-            <img
-              src="https://i.suar.me/E0zW8/l"
-              alt="Logo"
-              style={{ height: 120 }}
-            />
-          </Link>
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ marginLeft: 2, marginRight: 2, flexGrow: 1 }}>
+            <Link to={ROUTES.HOME}>
+              <img
+                src="https://i.suar.me/KXyXn/l"
+                alt="Logo"
+                style={{ height: 75, width: "auto" }}
+              />
+            </Link>
+          </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 component={Link}
                 to={page === "Sign in" ? ROUTES.SIGN_IN : ROUTES.SIGN_UP}
-                sx={{ my: 2, color: "white", marginLeft: 2 }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  marginLeft: 2,
+                  "&:hover": {
+                    color: "lime",
+                  },
+                }}
               >
                 {page}
               </Button>
