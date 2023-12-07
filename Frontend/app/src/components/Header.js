@@ -2,52 +2,55 @@ import * as React from "react";
 import * as ROUTES from "../constants/routes";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-// import Avatar from '@mui/material/Avatar';
 import Button from "@mui/material/Button";
-// import Tooltip from '@mui/material/Tooltip';
 import MenuItem from "@mui/material/MenuItem";
-// import { Route } from "react-router-dom";
-// import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ["Sign in", "Register"];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+
+const pages = ["Sign in", "Sign up"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
-
   return (
     <AppBar position="static" sx={{ backgroundColor: "#d5d5d5" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <a href={ROUTES.HOME}>
+          <Link to={ROUTES.HOME}>
             <img
-            src="https://j.top4top.io/p_2896b1wn21.png"
-            alt="Logo"
-            style={{ height: 120}}/>
-          </a>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              src="https://i.suar.me/E0zW8/l"
+              alt="Logo"
+              style={{ height: 120 }}
+            />
+          </Link>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                component={Link}
+                to={page === "Sign in" ? ROUTES.SIGN_IN : ROUTES.SIGN_UP}
+                sx={{ my: 2, color: "white", marginLeft: 2 }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -78,25 +81,20 @@ function Header() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Link
+                    to={page === "Sign in" ? ROUTES.SIGN_IN : ROUTES.SIGN_UP}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {page}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={ROUTES.SIGN_UP}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
 export default Header;
