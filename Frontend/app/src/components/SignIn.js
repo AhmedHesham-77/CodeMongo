@@ -40,7 +40,9 @@ export default function SignIn() {
     const handleSubmit = (event) => {
       event.preventDefault();
       axios.post('http://localhost:5000/api/users/signin' , {email , password}).then((result) => {
+
       if(result.data.STATUS === "OK"){
+          window.localStorage.setItem('email' , result.data.EMAIL);
           if(result.data.ROLE === "Admin"){
             navigate('/dashboard');
           } else {

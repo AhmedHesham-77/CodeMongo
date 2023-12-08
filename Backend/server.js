@@ -51,7 +51,8 @@ app.post('/api/users/signin' , async (req , res) => {
                 const SECRET_KEY = 'strongUniqueAndRandom';
                 const token = jwt.sign({email: user.email , role: user.role} , SECRET_KEY , {expiresIn: '1d'});
                 res.cookie('token' , token); // STORE INSIDE THE COOKIE.
-                return res.json({STATUS: "OK" , ROLE: user.role});
+                // localStorage.setItem('email' , user.email);
+                return res.json({STATUS: "OK" , ROLE: user.role , EMAIL: user.email , TOKEN: token});
             } else {
                 return res.json('The password incorrect');
             }

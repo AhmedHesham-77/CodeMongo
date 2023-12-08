@@ -21,6 +21,12 @@ function Header() {
     setAnchorElNav(event.currentTarget);
   };
 
+  const HandleClickToken = (event) => {
+    event.preventDefault();
+    window.localStorage.removeItem('email');
+    window.location = '/';
+  }
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -38,12 +44,12 @@ function Header() {
               />
             </Link>
           </Box>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
+
+          {!!window.localStorage.getItem('email') ?
+                <Button
+                key={"Logout"}
                 component={Link}
-                to={page === "Sign in" ? ROUTES.SIGN_IN : ROUTES.SIGN_UP}
+                to={ROUTES.HOME}
                 sx={{
                   my: 2,
                   color: "white",
@@ -52,11 +58,35 @@ function Header() {
                     color: "lime",
                   },
                 }}
-              >
-                {page}
+                onClick={HandleClickToken}
+                >
+                {"Logout"}
               </Button>
-            ))}
-          </Box>
+
+              :
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              {pages.map((page) => (
+                <Button
+                  key={page}
+                  component={Link}
+                  to={page === "Sign in" ? ROUTES.SIGN_IN : ROUTES.SIGN_UP}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    marginLeft: 2,
+                    "&:hover": {
+                      color: "lime",
+                    },
+                  }}
+                >
+                  {page}
+                </Button>
+              ))}
+            </Box>
+          }
+
+
+
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
