@@ -140,5 +140,4 @@ mongoose
   })
   .catch((err) => {
     // console.log('The Mongo DB Start Failed');
-    console.log(err);
   });
