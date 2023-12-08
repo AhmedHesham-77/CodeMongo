@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('./models/User');
+const Product = require('./models/Product');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
@@ -17,7 +18,7 @@ app.use(cors({
 app.use(cookieParser());
 
 const PORT = 5000;
-const DB_URI = 'mongodb+srv://mohamedmahmoudmido15:KnUbHyhbblVARCuN@cluster0.kn6n32y.mongodb.net/';
+const DB_URI = 'mongodb+srv://mohamedmahmoudmido15:JaSEGQs2OdZK5NXQ@greenbook.g0qzspd.mongodb.net/';
 
 app.get('/' , (req , res) => {
     res.send('DONE');
@@ -62,12 +63,25 @@ app.post('/api/users/signin' , async (req , res) => {
     }
 });
 
+app.post('/product/create' , async (req , res) => {
+
+    const product = await Product.create({
+        title: req.body.title,
+        about: req.body.about,
+        img: req.body.img,
+        price: req.body.price,
+        userId: req.body.userId,
+    });
+    return res.json(product);
+});
+
 
 mongoose.connect(DB_URI).then(() => {
     console.log('The Mongo DB Running Successfully');
     app.listen(PORT , () => {
         console.log(`The Server Running On The Port ${PORT} Successfully`);
     });
-}).catch(() => {
-    console.log('The Mongo DB Start Failed');
+}).catch((err) => {
+    // console.log('The Mongo DB Start Failed');
+    console.log(err);
 });

@@ -27,6 +27,7 @@ function Header() {
     window.location = '/';
   }
 
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };

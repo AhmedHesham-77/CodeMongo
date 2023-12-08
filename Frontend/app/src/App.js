@@ -8,6 +8,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Dashboard from "./components/Dashboard";
 import SellScreen from "./components/SellScreen";
 import Profile from './components/Profile'
+import CreateProduct from "./components/CreateProduct";
+import UpdateProduct from "./components/UpdateProduct";
+import DeleteProduct from "./components/DeleteProduct";
 
 const theme = createTheme();
 
@@ -23,6 +26,9 @@ function App() {
           <Route path={ROUTES.DASHBOARD} element={<Dashboard />}></Route>
           <Route path={ROUTES.PROFILE} element={<Profile />}/>
           <Route path={ROUTES.SELL} element={<SellScreen />}/>
+          <Route path={ROUTES.CREATE_PRODUCT} element={<CreateProduct />}/>
+          <Route path={ROUTES.UPDATE_PRODUCT} element={<UpdateProduct />}/>
+          <Route path={ROUTES.DELETE_PRODUCT} element={<DeleteProduct />}/>
         </Routes>
       </Router>
     </ThemeProvider>
