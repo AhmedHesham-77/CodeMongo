@@ -10,8 +10,25 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import Typography from '@mui/material/Typography';
+import './Body.css'
 
 const pages = ["Sign in", "Sign up"];
+
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+        Green Store
+      {new Date().getFullYear()}
+    </Typography>
+  );
+}
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -25,78 +42,10 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#1c2f19" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#003300" }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ marginLeft: 2, marginRight: 2, flexGrow: 1 }}>
-            <Link to={ROUTES.HOME}>
-              <img
-                src="https://i.suar.me/KXyXn/l"
-                alt="Logo"
-                style={{ height: 75, width: "auto" }}
-              />
-            </Link>
-          </Box>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                component={Link}
-                to={page === "Sign in" ? ROUTES.SIGN_IN : ROUTES.SIGN_UP}
-                sx={{
-                  my: 2,
-                  color: "white",
-                  marginLeft: 2,
-                  "&:hover": {
-                    color: "lime",
-                  },
-                }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link
-                    to={page === "Sign in" ? ROUTES.SIGN_IN : ROUTES.SIGN_UP}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    {page}
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+        <Toolbar disableGutters className="footer">
+          <Copyright color="white" />
         </Toolbar>
       </Container>
     </AppBar>
