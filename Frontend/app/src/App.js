@@ -11,6 +11,7 @@ import Profile from './components/Profile'
 import CreateProduct from "./components/CreateProduct";
 import UpdateProduct from "./components/UpdateProduct";
 import DeleteProduct from "./components/DeleteProduct";
+import ShowProducts from "./components/ShowProducts";
 
 const theme = createTheme();
 
@@ -29,6 +30,7 @@ function App() {
           <Route path={ROUTES.CREATE_PRODUCT} element={<CreateProduct />}/>
           <Route path={ROUTES.UPDATE_PRODUCT} element={<UpdateProduct />}/>
           <Route path={ROUTES.DELETE_PRODUCT} element={<DeleteProduct />}/>
+          <Route path={ROUTES.SHOW_PRODUCTS} element={<ShowProducts />}/>
         </Routes>
       </Router>
     </ThemeProvider>

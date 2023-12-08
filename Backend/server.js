@@ -64,15 +64,19 @@ app.post('/api/users/signin' , async (req , res) => {
 });
 
 app.post('/product/create' , async (req , res) => {
-
     const product = await Product.create({
         title: req.body.title,
         about: req.body.about,
         img: req.body.img,
         price: req.body.price,
-        userId: req.body.userId,
+        userEmail: req.body.userEmail,
     });
     return res.json(product);
+});
+
+app.get('/products' , async (req , res) => {
+    const products = await Product.find();
+    return res.json(products);
 });
 
 

@@ -1,4 +1,3 @@
-// import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -41,11 +40,9 @@ export default function CreateProduct() {
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.post('http://localhost:5000/product/create' , { title , about , img , price , userEmail }).then((result) => {
-
             console.log(result.data);
             alert('Product Created');
-
-
+            window.location = ROUTES.HOME;
         }).catch((err) => {
 
             console.log(err);

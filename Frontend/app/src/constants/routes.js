@@ -7,3 +7,4 @@ export const PROFILE = '/profile';
 export const CREATE_PRODUCT = '/product/create';
 export const UPDATE_PRODUCT = '/product/update';
 export const DELETE_PRODUCT = '/product/delete';
+export const SHOW_PRODUCTS = '/products';
