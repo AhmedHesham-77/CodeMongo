@@ -7,7 +7,7 @@
 }
 
 .main {
-    background-color: #d9d9d984;
+    background-color: #d4e3d58f;
     height: 87vh;
     display: flex;
     justify-content: center;
@@ -39,4 +39,10 @@
 .main .about h1 {
     font-size: 50px;
     font-weight: bold;
+}
+
+.footer{
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
