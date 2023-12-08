@@ -1,73 +1,66 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import Header from './Header'
-// import { ThemeProvider, createTheme } from '@mui/material/styles';
-
 import * as React from 'react';
-
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-
+import { green, red } from "@mui/material/colors";
 
 function ShowProducts() {
 
-  // const theme = createTheme();
-
-    const [ products , setProducts ] = useState([]);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/products').then((products) => {
-            setProducts(products.data);
+        axios.get('http://localhost:5000/products').then((response) => {
+            setProducts(response.data);
         }).catch((err) => {
             console.log(err);
         })
-    } , []);
+    }, []);
+
 
     return (
-
-      <div>
-          <Header/>
-          {
-            products.map((product) => (
-              <div>
-
-<Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={product.img}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-      </CardActions>
-    </Card>
-
-
-
-
-
-
-              </div>
-            ))
-          }
-       </div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Header />
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', gap: '5px' , backgroundColor: '#d4e3d58f' }}>
+                {
+                    products.map((product, index) => (
+                        <Card key={index} sx={{ width: '250px', height: '325px' , margin: '5px' , borderRadius: 10 , backgroundColor: 'white' }}>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    height="140"
+                                    image={product.img}
+                                    alt="product"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div" sx = {{color: 'black' , textAlign: 'center'}}>
+                                        {product.title}
+                                    </Typography>
+                                    <Typography gutterBottom variant="h6" component="div" sx = {{color: 'black' , textAlign: 'center' , marginTop: 2}}>
+                                        ${product.price}
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                            <CardActions>
+                                <Button size="small" sx = {{color: '#1e991e' , marginLeft: 10}} onClick={
+                                    (event) => {
+                                        event.preventDefault();
+                                        window.location = `/product/${product._id}`;
+                                      }
+                                    }
+                                    >
+                                    EXPLORE
+                                </Button>
+                            </CardActions>
+                        </Card>
+                    ))
+                }
+            </div>
+        </div>
     );
 }
 

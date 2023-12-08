@@ -10,6 +10,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import Typography from '@mui/material/Typography';
 
 const pages = ["Sign in", "Sign up"];
 
@@ -38,11 +40,7 @@ function Header() {
         <Toolbar disableGutters>
           <Box sx={{ marginLeft: 2, marginRight: 2, flexGrow: 1 }}>
             <Link to={ROUTES.HOME}>
-              <img
-                src="https://i.suar.me/KXyXn/l"
-                alt="Logo"
-                style={{ height: 75, width: "auto" }}
-              />
+              <AutoStoriesIcon sx={{ color: 'green' , width: 45 , height: 45  }}></AutoStoriesIcon>
             </Link>
           </Box>
 

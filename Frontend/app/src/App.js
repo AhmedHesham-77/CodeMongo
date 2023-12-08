@@ -13,13 +13,14 @@ import CreateProduct from "./components/CreateProduct";
 import UpdateProduct from "./components/UpdateProduct";
 import DeleteProduct from "./components/DeleteProduct";
 import ShowProducts from "./components/ShowProducts";
+import ShowProduct from './components/ShowProduct'
 
 const theme = createTheme();
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    
+
       <Router>
         {/* <Header/> */}
         <Routes>
@@ -34,6 +35,7 @@ function App() {
           <Route path={ROUTES.UPDATE_PRODUCT} element={<UpdateProduct />}/>
           <Route path={ROUTES.DELETE_PRODUCT} element={<DeleteProduct />}/>
           <Route path={ROUTES.SHOW_PRODUCTS} element={<ShowProducts />}/>
+          <Route path={ROUTES.SHOW_PRODUCT} element={<ShowProduct />}/>
         </Routes>
         {/* <Footer/> */}
       </Router>

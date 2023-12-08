@@ -23,9 +23,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-        Green Store
-      {new Date().getFullYear()}
+      {"Made with ♡ by "}
+        Green Book Team
+      
     </Typography>
   );
 }

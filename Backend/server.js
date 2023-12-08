@@ -19,8 +19,8 @@ app.use(
 app.use(cookieParser());
 
 const PORT = 5000;
-const DB_URI =
-  "mongodb+srv://mohamedmahmoudmido15:KnUbHyhbblVARCuN@cluster0.kn6n32y.mongodb.net/?retryWrites=true&w=majority";
+const DB_URI = 'mongodb+srv://mohamedmahmoudmido15:JaSEGQs2OdZK5NXQ@greenbook.g0qzspd.mongodb.net/';
+
 
 app.get("/", (req, res) => {
   res.send("DONE");
@@ -130,6 +130,21 @@ app.put("/product/update", async (req, res) => {
   }
 });
 
+app.get('/products' , async (req , res) => {
+    const products = await Product.find();
+    return res.json(products);
+});
+
+app.get('/product/:id' , async (req , res) => {
+    const id = req.params.id;
+
+    const product = await Product.findById({_id: id});
+
+    return res.json(product);
+
+});
+
+
 mongoose
   .connect(DB_URI)
   .then(() => {
@@ -139,5 +154,5 @@ mongoose
     });
   })
   .catch((err) => {
-    // console.log('The Mongo DB Start Failed');
+    console.log('The Mongo DB Start Failed');
   });
