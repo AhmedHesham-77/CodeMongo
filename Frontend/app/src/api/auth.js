@@ -1,10 +1,8 @@
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
-const key = 'token';
-
-const setToken = token => localStorage.setItem(key, token);
-const deleteToken = () => localStorage.removeItem(key);
-const getToken = () => localStorage.getItem(key);
+const setToken = token => localStorage.setItem('token', token);
+const deleteToken = () => localStorage.removeItem('token');
+const getToken = () => localStorage.getItem('token');
 const getUser = () => {
     const token = getToken()
     return token && jwtDecode(token)

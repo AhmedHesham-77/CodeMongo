@@ -6,9 +6,9 @@ import Footer from './Footer'
 export default function Home() {
   return (
     <div>
-      <Header />
-      <Body/>
-      <Footer/>
+        <Header />
+        <Body/>
+        <Footer/>
     </div>
   )
 }

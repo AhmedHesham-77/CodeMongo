@@ -1,0 +1,31 @@
+.word {
+    color: white;
+    background-color: #1c2f19;
+    text-align: center;
+    width: 100%;
+    font-size: 500%;
+    font-weight: bold;
+}
+
+.buttons {
+    height: 85vh;
+    background-color: #d9d9d984;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons Button {
+    width: 45vw;
+    height: 15vh;
+    margin-top: 2%;
+    background-color: #1e8e1a;
+    border-radius: 35px;
+    font-size: 25px;
+}
+
+.buttons Button:hover {
+    background-color: #12d412;
+}
