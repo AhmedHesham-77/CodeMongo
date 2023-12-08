@@ -1,7 +1,8 @@
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import * as ROUTES from "./constants/routes";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -11,13 +12,16 @@ import Profile from './components/Profile'
 import CreateProduct from "./components/CreateProduct";
 import UpdateProduct from "./components/UpdateProduct";
 import DeleteProduct from "./components/DeleteProduct";
+import ShowProducts from "./components/ShowProducts";
 
 const theme = createTheme();
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+    
       <Router>
+        {/* <Header/> */}
         <Routes>
           <Route path={ROUTES.HOME} element={<Home />}>
           </Route>
@@ -29,7 +33,9 @@ function App() {
           <Route path={ROUTES.CREATE_PRODUCT} element={<CreateProduct />}/>
           <Route path={ROUTES.UPDATE_PRODUCT} element={<UpdateProduct />}/>
           <Route path={ROUTES.DELETE_PRODUCT} element={<DeleteProduct />}/>
+          <Route path={ROUTES.SHOW_PRODUCTS} element={<ShowProducts />}/>
         </Routes>
+        {/* <Footer/> */}
       </Router>
     </ThemeProvider>
   );

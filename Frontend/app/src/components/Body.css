@@ -24,7 +24,6 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-
 }
 
 .main img {
@@ -41,7 +40,7 @@
     font-weight: bold;
 }
 
-.footer{
+.footer {
     align-items: center;
     justify-content: center;
     color: white;
