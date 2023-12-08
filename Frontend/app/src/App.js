@@ -6,6 +6,7 @@ import * as ROUTES from "./constants/routes";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Dashboard from "./components/Dashboard";
+import SellScreen from "./components/SellScreen";
 
 const theme = createTheme();
 
@@ -19,6 +20,7 @@ function App() {
           <Route path={ROUTES.SIGN_IN} element={<SignIn />}></Route>
           <Route path={ROUTES.SIGN_UP} element={<SignUp />}></Route>
           <Route path={ROUTES.DASHBOARD} element={<Dashboard />}></Route>
+          <Route path='/sell' element={<SellScreen />}/>
         </Routes>
       </Router>
     </ThemeProvider>
