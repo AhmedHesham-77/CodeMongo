@@ -13,7 +13,8 @@ import CreateProduct from "./components/CreateProduct";
 import UpdateProduct from "./components/UpdateProduct";
 import DeleteProduct from "./components/DeleteProduct";
 import ShowProducts from "./components/ShowProducts";
-import ShowProduct from './components/ShowProduct'
+import ShowProduct from "./components/ShowProduct";
+import Cart from "./components/Cart";
 
 const theme = createTheme();
 
@@ -36,6 +37,7 @@ function App() {
           <Route path={ROUTES.DELETE_PRODUCT} element={<DeleteProduct />}/>
           <Route path={ROUTES.SHOW_PRODUCTS} element={<ShowProducts />}/>
           <Route path={ROUTES.SHOW_PRODUCT} element={<ShowProduct />}/>
+          <Route path={ROUTES.CART} element={<Cart />}/>
         </Routes>
         {/* <Footer/> */}
       </Router>

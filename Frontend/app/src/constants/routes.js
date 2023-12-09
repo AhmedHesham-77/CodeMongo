@@ -9,3 +9,4 @@ export const UPDATE_PRODUCT = '/product/update';
 export const DELETE_PRODUCT = '/product/delete';
 export const SHOW_PRODUCTS = '/products';
 export const SHOW_PRODUCT = '/product/:id';
+export const CART = '/cart';

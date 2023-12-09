@@ -46,14 +46,6 @@
     color: white;
 }
 
-
-@media (max-width: 768px) {
-    .main .about {
-        margin-left: 0; /* Remove margin on the left */
-        line-height: 15px;
-    }
-
-    .main .about h1 {
-        font-size: 24px; /* Adjust font size */
-    }
+div.backGround{
+    background-color: #d4e3d58f;
 }

@@ -16,7 +16,6 @@ import Typography from '@mui/material/Typography';
 const pages = ["Sign in", "Sign up"];
 
 function Header() {
-
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -25,14 +24,36 @@ function Header() {
 
   const HandleClickToken = (event) => {
     event.preventDefault();
-    window.localStorage.removeItem('email');
-    window.location = '/';
-  }
+    window.localStorage.removeItem("email");
+    window.localStorage.removeItem("isAdmin");
+    window.location = "/";
+  };
 
+  const HandleAdminButton = (event) => {
+    event.preventDefault();
+    window.location = ROUTES.DASHBOARD;
+  };
+
+  const handleProfileButton = (event) => {
+    event.preventDefault();
+    window.location = "/profile";
+  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const HandleShowProducts = (event) => {
+    event.preventDefault();
+    window.location = ROUTES.SHOW_PRODUCTS;
+  }
+
+  const HandleCart = (event) => {
+    event.preventDefault();
+    window.location = ROUTES.CART;
+  }
+
+
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#003300" }}>
@@ -44,8 +65,88 @@ function Header() {
             </Link>
           </Box>
 
-          {!!window.localStorage.getItem('email') ?
+          <Button
+          key={"BOOKS"}
+          component={Link}
+          to={ROUTES.DASHBOARD}
+          sx={{
+            my: 2,
+            color: "white",
+            marginLeft: 2,
+            "&:hover": {
+              color: "lime",
+            },
+          }}
+          onClick={HandleShowProducts}
+          >
+          {"BOOKS"}
+          </Button>
+
+
+
+
+          {window.localStorage.getItem("isAdmin") === 'Admin' ?
+
+          <Button
+          key={"DASHBOARD"}
+          component={Link}
+          to={ROUTES.DASHBOARD}
+          sx={{
+            my: 2,
+            color: "white",
+            marginLeft: 2,
+            "&:hover": {
+              color: "lime",
+            },
+          }}
+          onClick={HandleAdminButton}
+          >
+          {"DASHBOARD"}
+          </Button>
+            :
+            <></>
+
+          }
+
+
+
+
+          {!!window.localStorage.getItem("email") ? (
+            <Box>
                 <Button
+                key={"Cart"}
+                component={Link}
+                to={ROUTES.HOME}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  marginLeft: 2,
+                  "&:hover": {
+                    color: "lime",
+                  },
+                }}
+                onClick={HandleCart}
+              >
+                {"CART"}
+              </Button>
+
+               <Button
+                key={"Profile"}
+                component={Link}
+                to={ROUTES.PROFILE}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  marginLeft: 2,
+                  "&:hover": {
+                    color: "lime",
+                  },
+                }}
+                onClick={handleProfileButton}
+              >
+                {"Profile"}
+              </Button>
+              <Button
                 key={"Logout"}
                 component={Link}
                 to={ROUTES.HOME}
@@ -58,12 +159,12 @@ function Header() {
                   },
                 }}
                 onClick={HandleClickToken}
-                >
+              >
                 {"Logout"}
               </Button>
-
-              :
-              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            </Box>
+          ) : (
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
                   key={page}
@@ -82,7 +183,8 @@ function Header() {
                 </Button>
               ))}
             </Box>
-          }
+          )}
+
 
 
 

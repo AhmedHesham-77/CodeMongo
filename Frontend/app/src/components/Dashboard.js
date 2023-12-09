@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import * as ROUTES from "../constants/routes";
 import './Dashboadrd.css'
+import Header from './Header';
 
 function Dashboard() {
 
@@ -24,7 +25,7 @@ function Dashboard() {
 
 
         <>
-            <div className="word"> Admin Panel </div>
+            <Header/>
             <div className="buttons">
                 <Button variant="contained" onClick={HandleCreateProduct}>Add Product</Button>
                 <Button variant="contained" onClick={HandleUpdateProduct}>Update Product</Button>

@@ -11,8 +11,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useState } from 'react';
-import * as ROUTES from "../constants/routes";
-
+import * as ROUTES from '../constants/routes';
+import * as React from 'react';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 function Copyright(props) {
   return (
@@ -30,29 +32,31 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function CreateProduct() {
+  const [title, setTitle] = useState('');
+  const [about, setAbout] = useState('');
+  const [img, setImg] = useState('');
+  const [price, setPrice] = useState('');
+  const [userEmail, setUserEmail] = useState(window.localStorage.getItem('email'));
+  const [successAlertOpen, setSuccessAlertOpen] = useState(false);
 
-    const [ title , setTitle ] = useState();
-    const [ about , setAbout ] = useState();
-    const [ img , setImg ] = useState();
-    const [ price , setPrice ] = useState();
-    const [ userEmail , setUserEmail ] = useState(window.localStorage.getItem('email'));
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios.post('http://localhost:5000/product/create' , { title , about , img , price , userEmail }).then((result) => {
-            console.log(result.data);
-            alert('Product Created');
-            window.location = ROUTES.HOME;
-        }).catch((err) => {
-
-            console.log(err);
-
-        })
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post('http://localhost:5000/product/create', { title, about, img, price, userEmail })
+      .then((result) => {
+        setSuccessAlertOpen(true);
+        setTimeout(() => {
+          setSuccessAlertOpen(false);
+        }, 3000);
+        window.location = ROUTES.HOME;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs"  sx = {{backgroundColor: '#e9e9e984' , width: 600 , height: 575 , borderRadius: 15}}>
+      <Container component="main" maxWidth="xs" sx={{ backgroundColor: '#e9e9e984', width: 600, height: 575, borderRadius: 15 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -69,36 +73,33 @@ export default function CreateProduct() {
             Create A Product
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-
             <Grid container spacing={2}>
-
-                <Grid item xs={12}>
-                    <TextField
-                    required
-                    fullWidth
-                    id="Title"
-                    label="Title"
-                    name="Title"
-                    autoComplete="Title"
-                    onChange={(event) => {
-                        setTitle(event.target.value);
-                      }}
-                    />
-                </Grid>
-
-                <Grid item xs={12}>
-                    <TextField
-                    required
-                    fullWidth
-                    id="About"
-                    label="About"
-                    name="About"
-                    autoComplete="About"
-                    onChange={(event) => {
-                        setAbout(event.target.value);
-                      }}
-                /></Grid>
-
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="Title"
+                  label="Title"
+                  name="Title"
+                  autoComplete="Title"
+                  onChange={(event) => {
+                    setTitle(event.target.value);
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="About"
+                  label="About"
+                  name="About"
+                  autoComplete="About"
+                  onChange={(event) => {
+                    setAbout(event.target.value);
+                  }}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -110,9 +111,8 @@ export default function CreateProduct() {
                   onChange={(event) => {
                     setImg(event.target.value);
                   }}
-
-              /></Grid>
-
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -124,24 +124,30 @@ export default function CreateProduct() {
                   onChange={(event) => {
                     setPrice(event.target.value);
                   }}
-              />
-
+                />
               </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2,
+              sx={{
+                mt: 3,
+                mb: 2,
                 backgroundColor: '#1ea407',
-                "&:hover": {
-                  backgroundColor: "limegreen",
+                '&:hover': {
+                  backgroundColor: 'limegreen',
                 },
               }}
             >
               Create
             </Button>
           </Box>
+          {successAlertOpen && (
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              <Alert severity="success"> Book created successfully! </Alert>
+            </Stack>
+          )}
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>

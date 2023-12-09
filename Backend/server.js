@@ -9,60 +9,46 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true,
-  })
-);
+app.use(cors({ origin: ["http://localhost:3000"] , methods: ["GET", "POST", "DELETE", "PUT"] , credentials: true }));
 app.use(cookieParser());
 
 const PORT = 5000;
 const DB_URI = 'mongodb+srv://mohamedmahmoudmido15:JaSEGQs2OdZK5NXQ@greenbook.g0qzspd.mongodb.net/';
 
+app.get("/", (req, res) => { res.send("Server"); });
 
-app.get("/", (req, res) => {
-  res.send("DONE");
+app.get('/products' , async (req , res) => {
+  const products = await Product.find();
+    return res.json(products);
 });
 
-app.post("/api/users/signup", async (req, res) => {
-  const { username, email, password } = req.body;
-  let user = await User.findOne({ username: username });
-  if (user) return res.status(400).send("Username already taken");
-  user = new User({ username, email, password });
-  await user.save();
-  return res.json(user);
+app.post("/api/users/signup" , async (req, res) => {
+    const { username , email , password } = req.body;
+    let user = await User.findOne({ email });
+    if (user)
+      return res.status(400).send("Email already taken");
+    user = new User({ username, email, password });
+    await user.save();
+    return res.json(user);
 });
 
 app.post("/api/users/signin", async (req, res) => {
-  const { email, password } = req.body;
+  const { email , password } = req.body;
 
-  // NOT EMPTY:
   if (!email) return res.status(400).send("Email is required");
   if (!password) return res.status(400).send("Password is required");
 
-  const user = await User.findOne({ email: email });
-  if (!user) return res.status(404).send("User with given email doesn't exist");
+  const user = await User.findOne({ email });
+  if (!user)
+    return res.status(404).send("User with given email doesn't exist");
 
   if (user) {
-    bcrypt.compare(password, user.password, (err, response) => {
+    bcrypt.compare(password , user.password , (err , response) => {
       if (response) {
-        // Generate token.
         const SECRET_KEY = "strongUniqueAndRandom";
-        const token = jwt.sign(
-          { email: user.email, role: user.role },
-          SECRET_KEY,
-          { expiresIn: "1d" }
-        );
-        res.cookie("token", token); // STORE INSIDE THE COOKIE.
-        // localStorage.setItem('email' , user.email);
-        return res.json({
-          STATUS: "OK",
-          ROLE: user.role,
-          EMAIL: user.email,
-          TOKEN: token,
-        });
+        const token = jwt.sign({ email: user.email , role: user.role } , SECRET_KEY , { expiresIn: "1d" });
+        res.cookie("token" , token);
+        return res.json({ STATUS: "OK" , ROLE: user.role , EMAIL: user.email , TOKEN: token });
       } else {
         return res.json("The password incorrect");
       }
@@ -84,14 +70,10 @@ app.post("/product/create", async (req, res) => {
 });
 
 app.delete("/product/delete", async (req, res) => {
-  // const product_id = req.body.productId;
-
   try {
     const { productId } = req.body;
 
     const product = await Product.findByIdAndDelete(productId);
-
-    console.log(product);
 
     if (!product) {
       return res
@@ -102,6 +84,12 @@ app.delete("/product/delete", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+});
+
+app.get('/product/:id' , async (req , res) => {
+  const id = req.params.id;
+  const product = await Product.findById({_id: id});
+  return res.json(product);
 });
 
 app.put("/product/update", async (req, res) => {
@@ -130,19 +118,22 @@ app.put("/product/update", async (req, res) => {
   }
 });
 
-app.get('/products' , async (req , res) => {
-    const products = await Product.find();
-    return res.json(products);
+app.get("/profile", async (req, res) => {
+  try {
+    const { email } = req.query;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: `Cannot find any user with Email ${email}` });
+    }
+
+    return res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-app.get('/product/:id' , async (req , res) => {
-    const id = req.params.id;
 
-    const product = await Product.findById({_id: id});
-
-    return res.json(product);
-
-});
 
 
 mongoose

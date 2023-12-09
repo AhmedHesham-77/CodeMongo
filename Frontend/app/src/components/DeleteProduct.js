@@ -1,4 +1,3 @@
-// import * as React from 'react';
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +12,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useState } from "react";
 import * as ROUTES from "../constants/routes";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 function Copyright(props) {
   return (
@@ -35,19 +36,23 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function DeleteProduct() {
-  // const [ userEmail , setUserEmail ] = useState(window.localStorage.getItem('email'));
   const [productId, setProductId] = useState();
+  const [successAlertOpen, setSuccessAlertOpen] = useState(false);
+  const [errorAlertOpen, setErrorAlertOpen] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
       .delete("http://localhost:5000/product/delete", { data: { productId } })
       .then((result) => {
-        console.log(result.data.productId);
-        alert("Product Deleted");
+        setSuccessAlertOpen(true);
+        setTimeout(() => {
+          setSuccessAlertOpen(false);
+          window.location = ROUTES.HOME;
+        }, 3000); // Close the success alert after 3 seconds and redirect to home
       })
       .catch((err) => {
-        console.log(err);
+        setErrorAlertOpen(true);
       });
   };
 
@@ -59,7 +64,7 @@ export default function DeleteProduct() {
         sx={{
           backgroundColor: "#e9e9e984",
           width: 600,
-          height: 575,
+          height: 350,
           borderRadius: 15,
         }}
       >
@@ -115,6 +120,16 @@ export default function DeleteProduct() {
               Delete
             </Button>
           </Box>
+          {successAlertOpen && (
+            <Stack sx={{ width: "100%" }} spacing={2}>
+              <Alert severity="success">Book deleted successfully!</Alert>
+            </Stack>
+          )}
+          {errorAlertOpen && (
+            <Stack sx={{ width: "100%" }} spacing={2}>
+              <Alert severity="error">Error deleting the product.</Alert>
+            </Stack>
+          )}
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>

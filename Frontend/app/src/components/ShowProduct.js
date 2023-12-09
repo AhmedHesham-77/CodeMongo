@@ -23,7 +23,7 @@ function ShowProduct() {
 
     const HandleOnlyProduct = (event) => {
         event.preventDefault();
-        window.location = ROUTES.HOME;
+        window.location = ROUTES.CART;
     }
 
 
@@ -50,7 +50,7 @@ function ShowProduct() {
                         <Typography variant="body1" paragraph sx = {{color: 'black' , marginLeft: 0 , marginTop: 1 , fontSize: 15}}>
                         {product.about}
                         </Typography>
-                        <Typography className = "btn-and-price" variant="h4" color="black" sx = {{marginTop: 14 , color: '#136713' , backgroundColor: '#e8ece8'}}>
+                        <Typography className = "btn-and-price" variant="h4" color="black" sx = {{marginTop: 3 , color: '#136713' , backgroundColor: '#e8ece8'}}>
                         ${product.price}
                         </Typography>
 

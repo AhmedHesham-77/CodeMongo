@@ -7,7 +7,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { green, red } from "@mui/material/colors";
 
 function ShowProducts() {
 
@@ -28,7 +27,7 @@ function ShowProducts() {
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', gap: '5px' , backgroundColor: '#d4e3d58f' }}>
                 {
                     products.map((product, index) => (
-                        <Card key={index} sx={{ width: '250px', height: '325px' , margin: '5px' , borderRadius: 10 , backgroundColor: 'white' }}>
+                        <Card key={index} sx={{ width: '250px', height: '335px' , margin: '5px' , borderRadius: 10 , backgroundColor: 'white' }}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
